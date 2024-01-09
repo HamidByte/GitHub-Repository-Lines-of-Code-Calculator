@@ -5,7 +5,7 @@
     <div class="container">
       <h2 class="search-text">Count lines of code in a GitHub repository</h2>
       <div class="search-box">
-        <input class="input-box" v-model="searchQuery" placeholder="user/repo" autofocus @mouseenter="isHovered = true" @mouseleave="isHovered = false" />
+        <input class="input-box" v-model="searchQuery" @keyup.enter="search" @mouseenter="isHovered = true" @mouseleave="isHovered = false" placeholder="user/repo" autofocus />
         <div class="search-icon">
           <IconSearch @click="search" :color="isDark ? (isHovered ? colors.darkHovered : colors.dark) : isHovered ? colors.lightHovered : colors.light" />
         </div>
