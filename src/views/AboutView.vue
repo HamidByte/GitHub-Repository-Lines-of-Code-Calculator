@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div>
     <h1 class="title">GitHub Repository Line of Code Calculator</h1>
 
     <div class="container">

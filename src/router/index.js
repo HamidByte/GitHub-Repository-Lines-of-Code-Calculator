@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import SearchResult from '@/components/SearchResult.vue'
+import UserRepositories from '@/components/UserRepositories.vue'
 import PageNotFound from '@/views/PageNotFound.vue'
 
 const router = createRouter({
@@ -12,6 +13,14 @@ const router = createRouter({
       component: HomeView,
       meta: {
         title: 'Home'
+      }
+    },
+    {
+      path: '/:user',
+      name: 'UserRepositories',
+      component: UserRepositories,
+      meta: {
+        title: 'Repositories'
       }
     },
     {

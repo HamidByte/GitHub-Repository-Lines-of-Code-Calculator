@@ -1,9 +1,9 @@
 <template>
-  <div class="main">
+  <div>
     <h1 class="title">GitHub Repository Line of Code Calculator</h1>
 
     <div class="container">
-      <div class="error-bad-request" v-if="errorFetchingData">
+      <div class="message" v-if="errorFetchingData">
         <h2>No results. Please enter a valid search query.</h2>
       </div>
       <div v-else>
@@ -19,7 +19,6 @@
 import { api } from '@/api'
 
 export default {
-  // Add logic to fetch GitHub data using Axios based on the user and repo params
   data() {
     return {
       user: null,
@@ -34,19 +33,37 @@ export default {
   created() {
     this.user = this.$route.params.user
     this.repo = this.$route.params.repo
-    this.branch = this.$route.query.branch || 'master' // Use the specified branch or default to 'master'
+    this.branch = this.$route.query.branch
 
-    // Make a request to the GitHub API
-    // Fetch GitHub data based on user, repo, and branch
-    this.getRepositoryData(this.user, this.repo, this.branch)
+    if (this.branch) {
+      // If the user provides a branch
+      this.getRepositoryData(this.user, this.repo, this.branch)
+    } else {
+      // Make a request to the GitHub API to get repository information
+      this.getRepositoryInfo(this.user, this.repo)
+    }
   },
   methods: {
+    async getRepositoryInfo(user, repo) {
+      try {
+        const repoInfo = await api.getRepositoryInformation(user, repo)
+
+        // Get the default branch from the repository information
+        this.branch = repoInfo.default_branch
+
+        // Fetch GitHub data based on user, repo, and branch
+        this.getRepositoryData(user, repo, this.branch)
+      } catch (error) {
+        this.totalLines = 0
+        this.errorFetchingData = true
+        // eslint-disable-next-line no-console
+        console.error('Error fetching repository information:', error)
+      }
+    },
+
     async getRepositoryData(user, repo, branch) {
       try {
-        const repositoryInfo = await api.getRepositoryInformation(user, repo)
         const { repositoryTree, repositoryContents } = await this.fetchRepositoryData(user, repo, branch)
-
-        console.log(repositoryInfo)
 
         // We are not using filePaths at the moment
         // Extract file paths
@@ -124,7 +141,7 @@ export default {
 @import '../assets/base.css';
 @import '../assets/layout.css';
 
-.error-bad-request h2 {
+.message h2 {
   color: var(--color-dark-subtle);
   margin: 1rem;
   font-size: 1.125rem;
@@ -133,7 +150,7 @@ export default {
   text-align: center;
 }
 
-.dark .error-bad-request h2 {
+.dark .message h2 {
   color: var(--color-light-accent-2);
 }
 
