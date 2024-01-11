@@ -4,7 +4,11 @@
       <h2>Invalid user or user not found. Please check the username and try again.</h2>
     </div>
     <div v-else>
-      <div v-if="repositories.length">
+      <div v-if="loading">
+        <!-- Loading indicator -->
+        <p>Loading...</p>
+      </div>
+      <div v-else-if="repositories.length">
         <div class="user-info">
           <h1 style="font-size: 1.5rem; line-height: 2rem">
             <a class="user-link" :href="owner.html_url" target="_blank">
@@ -72,10 +76,10 @@ export default {
   },
   setup() {
     const router = useRouter()
-    const isHovered = ref(false)
+    const loading = ref(true)
 
     const isDark = useDark()
-    return { router, isDark, isHovered }
+    return { router, isDark, loading }
   },
   data() {
     return {
@@ -101,8 +105,10 @@ export default {
         this.owner = await api.getOwnerInformation(user)
 
         this.errorFetchingData = false
+        this.loading = false
       } catch (error) {
         this.errorFetchingData = true
+        this.loading = false
         // eslint-disable-next-line no-console
         console.error('Error fetching owner info:', error)
       }
@@ -116,8 +122,10 @@ export default {
         this.repositories.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
 
         this.errorFetchingData = false
+        this.loading = false
       } catch (error) {
         this.errorFetchingData = true
+        this.loading = false
         // eslint-disable-next-line no-console
         console.error('Error fetching repository data:', error)
       }

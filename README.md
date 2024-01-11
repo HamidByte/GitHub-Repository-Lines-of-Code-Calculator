@@ -1,6 +1,6 @@
-# GitHub Repository Line of Code Calculator
+# GitHub Repository Lines of Code Calculator
 
-Simplify GitHub repository analysis with our Line of Code Calculator. Quickly input the owner and repository name to obtain total lines of code, providing valuable insights for developers and project managers. Effortlessly streamline codebase assessments for enhanced efficiency.
+Simplify GitHub repository analysis with our Lines of Code Calculator. Quickly input the owner and repository name to obtain total lines of code, providing valuable insights for developers and project managers. Effortlessly streamline codebase assessments for enhanced efficiency.
 
 ## Prerequisites
 
@@ -19,13 +19,13 @@ Make sure you have the following software installed on your machine:
 1. **Clone the Repository:**
 
    ```sh
-   git clone https://github.com/mhamid49/GitHub-Repository-Line-of-Code-Calculator.git
+   git clone https://github.com/mhamid49/GitHub-Repository-Lines-of-Code-Calculator.git
    ```
 
 2. **Navigate to the Project Directory:**
 
    ```sh
-   cd GitHub-Repository-Line-of-Code-Calculator
+   cd GitHub-Repository-Lines-of-Code-Calculator
    ```
 
 3. **Configure Environment Variables:**

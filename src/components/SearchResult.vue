@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="title">GitHub Repository Line of Code Calculator</h1>
+    <h1 class="title">GitHub Repository Lines of Code Calculator</h1>
 
     <div class="container">
       <div class="message" v-if="errorFetchingData">
