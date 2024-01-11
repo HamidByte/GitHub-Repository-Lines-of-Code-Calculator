@@ -5,7 +5,7 @@
     <div class="container">
       <h2 class="search-text">Count lines of code in a GitHub repository</h2>
       <div class="search-box">
-        <input class="input-box" v-model="searchQuery" @input="handleInput" @keyup.enter="search" @focus="isFocused = true" @blur="isFocused = false" @mouseenter="isHovered = true" @mouseleave="isHovered = false" placeholder="user or user/repo" autofocus />
+        <input class="input-box" v-model="searchQuery" @input="handleInput" @keyup.enter="search" @focus="isFocused = true" @blur="isFocused = false" @mouseenter="isHovered = true" @mouseleave="isHovered = false" placeholder="Enter username or username/repository" autofocus />
         <div class="search-icon">
           <IconSearch @click="search" :color="getColors()" />
         </div>
@@ -84,6 +84,8 @@ export default {
           } else {
             // Only owner is provided, fetch all repositories
             this.repositories = await api.getAllPublicRepositories(this.searchQuery)
+            // Sort repositories by the updated_at property in descending order
+            this.repositories.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
             this.showDropdown = true
           }
         } else {

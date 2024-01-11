@@ -8,17 +8,7 @@
           </RouterLink>
         </li>
         <li class="nav-item">
-          <RouterLink
-            :to="{
-              name: 'SearchResult',
-              params: {
-                user: $store.state.searchQuery.split('/')[0] || 'defaultUser',
-                repo: $store.state.searchQuery.split('/')[1] || 'defaultRepo'
-              },
-              query: { branch: 'master' }
-            }"
-            title="Search repos"
-          >
+          <RouterLink to="/search" title="Search repos">
             <IconSearch :color="isDark ? colors.lightNormal : colors.darkNormal" />
           </RouterLink>
         </li>
