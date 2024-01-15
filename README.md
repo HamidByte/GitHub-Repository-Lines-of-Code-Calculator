@@ -2,6 +2,10 @@
 
 Simplify GitHub repository analysis with our Lines of Code Calculator. Quickly input the owner and repository name to obtain total lines of code, providing valuable insights for developers and project managers. Effortlessly streamline codebase assessments for enhanced efficiency.
 
+## Demo
+
+You can check out a live demo [here](https://ghloc.netlify.app/).
+
 ## Prerequisites
 
 Make sure you have the following software installed on your machine:
