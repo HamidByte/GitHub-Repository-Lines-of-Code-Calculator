@@ -68,24 +68,24 @@ export default {
           const parts = this.searchQuery.split('/')
 
           if (parts.length === 2) {
-            // Owner and repo are provided
-            const [owner, repo] = parts
+            // User and repo are provided
+            const [user, repo] = parts
             this.isInvalid = false
 
-            // Fetch repository information to get the default branch
-            const repositoryInfo = await api.getRepositoryInformation(owner, repo)
+            // Fetch a repository information to get the default branch
+            const repoInfo = await api.fetchARepository(user, repo)
 
             // Use the Vuex store to set the searchQuery
             this.$store.commit('setSearchQuery', this.searchQuery)
 
             // Clear the dropdown and show only the selected repository
-            this.repositories = [repositoryInfo]
+            this.repositories = [repoInfo]
             this.showDropdown = true
           } else {
-            // Only owner is provided, fetch all repositories
-            this.repositories = await api.getAllPublicRepositories(this.searchQuery)
+            // Only user is provided, fetch all repositories
+            this.repositories = await api.fetchUserPublicRepositories(this.searchQuery)
             // Sort repositories by the updated_at property in descending order
-            this.repositories.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
+            // this.repositories.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
             this.showDropdown = true
           }
         } else {
@@ -96,7 +96,7 @@ export default {
       } catch (error) {
         this.isInvalid = true
         // eslint-disable-next-line no-console
-        console.error('Error fetching repositories:', error)
+        console.error('Error fetching a repository or repositories for a user:', error)
       }
     },
 

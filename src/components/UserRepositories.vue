@@ -8,7 +8,7 @@
         <!-- Loading indicator -->
         <p>Loading...</p>
       </div>
-      <div v-else-if="repositories.length">
+      <div v-else-if="repositoriesList.length">
         <div class="user-info">
           <h1 style="font-size: 1.5rem; line-height: 2rem">
             <a class="user-link" :href="owner.html_url" target="_blank">
@@ -22,7 +22,7 @@
         <h2 style="font-weight: 600; font-size: 1.125rem; line-height: 1.75rem; margin-bottom: 0.5rem">Repositories</h2>
         <div class="repos">
           <div class="repo-list">
-            <a v-for="repo in repositories" :key="repo.id" class="repo-item" :href="`/${repo.owner.login}/${repo.name}?branch=${repo.default_branch}`" target="_blank">
+            <a v-for="repo in repositoriesList" :key="repo.id" class="repo-item" :href="`/${repo.owner.login}/${repo.name}?branch=${repo.default_branch}`" target="_blank">
               <div class="repo-item-title">{{ repo.name }}</div>
               <div class="repo-item-description">{{ shortDescription(repo.description) }}</div>
               <!-- Separator -->
@@ -85,7 +85,7 @@ export default {
     return {
       user: null,
       owner: null,
-      repositories: [],
+      repositoriesList: [],
       errorFetchingData: false,
       colors: {
         lightNormal: 'var(--color-light-subtle)',
@@ -96,13 +96,13 @@ export default {
   created() {
     this.user = this.$route.params.user
 
-    this.getOwnerInfo(this.user)
-    this.getRepositories(this.user)
+    this.getUserInfo(this.user)
+    this.getUserPublicRepositories(this.user)
   },
   methods: {
-    async getOwnerInfo(user) {
+    async getUserInfo(user) {
       try {
-        this.owner = await api.getOwnerInformation(user)
+        this.owner = await api.fetchAUser(user)
 
         this.errorFetchingData = false
         this.loading = false
@@ -110,16 +110,16 @@ export default {
         this.errorFetchingData = true
         this.loading = false
         // eslint-disable-next-line no-console
-        console.error('Error fetching owner info:', error)
+        console.error('Error fetching a user information:', error)
       }
     },
 
-    async getRepositories(user) {
+    async getUserPublicRepositories(user) {
       try {
-        this.repositories = await api.getAllPublicRepositories(user)
+        this.repositoriesList = await api.fetchUserPublicRepositories(user)
 
         // Sort repositories by the updated_at property in descending order
-        this.repositories.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
+        // this.repositoriesList.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
 
         this.errorFetchingData = false
         this.loading = false
@@ -127,7 +127,7 @@ export default {
         this.errorFetchingData = true
         this.loading = false
         // eslint-disable-next-line no-console
-        console.error('Error fetching repository data:', error)
+        console.error('Error fetching repositories for a user:', error)
       }
     },
 
