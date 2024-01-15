@@ -3,7 +3,7 @@
     <nav>
       <ul class="nav-container">
         <li class="nav-item">
-          <RouterLink to="/" title="Home">
+          <RouterLink to="/" title="Search users">
             <IconHome :color="isDark ? colors.lightNormal : colors.darkNormal" />
           </RouterLink>
         </li>
@@ -13,8 +13,13 @@
           </RouterLink>
         </li>
         <li class="nav-item">
-          <a href="https://github.com/mhamid49/" target="_blank" title="Project source code">
+          <a href="https://github.com/mhamid49/" target="_blank" title="My GitHub">
             <IconGithub :color="isDark ? colors.lightNormal : colors.darkNormal" />
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="https://github.com/mhamid49/GitHub-Repository-Lines-of-Code-Calculator" target="_blank" title="Project source code">
+            <IconCode :color="isDark ? colors.lightNormal : colors.darkNormal" />
           </a>
         </li>
         <li class="nav-item">
@@ -44,6 +49,7 @@ import { useDark, useToggle } from '@vueuse/core'
 import IconHome from '@/components/icons/IconHome.vue'
 import IconSearch from '@/components/icons/IconSearch.vue'
 import IconGithub from '@/components/icons/IconGithub.vue'
+import IconCode from '@/components/icons/IconCode.vue'
 import IconAbout from '@/components/icons/IconAbout.vue'
 import IconMoon from '@/components/icons/IconMoon.vue'
 import IconSun from '@/components/icons/IconSun.vue'
