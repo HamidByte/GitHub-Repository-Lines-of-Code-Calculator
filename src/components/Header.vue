@@ -13,12 +13,12 @@
           </RouterLink>
         </li>
         <li class="nav-item">
-          <a href="https://github.com/mhamid49/" target="_blank" title="My GitHub">
+          <a href="https://github.com/HamidByte/" target="_blank" title="My GitHub">
             <IconGithub :color="isDark ? colors.lightNormal : colors.darkNormal" />
           </a>
         </li>
         <li class="nav-item">
-          <a href="https://github.com/mhamid49/GitHub-Repository-Lines-of-Code-Calculator" target="_blank" title="Project source code">
+          <a href="https://github.com/HamidByte/GitHub-Repository-Lines-of-Code-Calculator" target="_blank" title="Project source code">
             <IconCode :color="isDark ? colors.lightNormal : colors.darkNormal" />
           </a>
         </li>

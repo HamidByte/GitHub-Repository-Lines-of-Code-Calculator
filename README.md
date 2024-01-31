@@ -23,7 +23,7 @@ Make sure you have the following software installed on your machine:
 1. **Clone the Repository:**
 
    ```sh
-   git clone https://github.com/mhamid49/GitHub-Repository-Lines-of-Code-Calculator.git
+   git clone https://github.com/HamidByte/GitHub-Repository-Lines-of-Code-Calculator.git
    ```
 
 2. **Navigate to the Project Directory:**
